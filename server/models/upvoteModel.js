@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const bookmarkSchema = new mongoose.Schema(
+const upvoteSchema = new mongoose.Schema(
     {
         userId:{
             type:String,
             required:true
         },
-        questionId:{
+        entityid:{
             type:String,
             required:true
         }
@@ -15,4 +15,4 @@ const bookmarkSchema = new mongoose.Schema(
     }
 )
 
-export const Bookmark = mongoose.model("Bookmark" , bookmarkSchema);
+export const Upvote = mongoose.model("Upvote" , upvoteSchema);

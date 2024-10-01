@@ -1,4 +1,5 @@
 import express from 'express'
+import {addCourse , editCourse , getCourseById , getPurchasedCourses , getMyCourses , reviewCourse , buyCourse , searchCourse} from '../controllers/courseController.js'
 
 const router = express.Router()
 

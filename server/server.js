@@ -47,7 +47,7 @@ app.listen(data.PORT, async () => {
 
 //flow of work:
 //30-all routes part and declaring the controllers
-//1-all models and half-of controllers(previously done)
+//1-all models and half-of controllers(auth , user, question, comment)
 //2-rest of controllers(till chatroom)
 //3-code compiler
 //4-frontend start

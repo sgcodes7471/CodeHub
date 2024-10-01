@@ -1,4 +1,5 @@
 import express from "expresss";
+import {getQuestions , getQuestionById , addQuestion , likeQuestion , bookmarkQuestion , deleteQuestion , editQuestion , searchQuestion } from '../controllers/questionController.js'
 
 const router = express.Router();
 
