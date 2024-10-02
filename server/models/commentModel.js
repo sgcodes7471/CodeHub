@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const commentSchema = new mongoose.Schema(
     {
         userId:{
-            type:String,
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',
             required:true
         },
         username:{
@@ -11,7 +12,8 @@ const commentSchema = new mongoose.Schema(
             required:true
         },
         questionId:{
-            type:String,
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Question',
             required:true
         },
         text:{
@@ -23,7 +25,7 @@ const commentSchema = new mongoose.Schema(
         },
         upvote:{
             type:Number,
-            required:true
+            default:0
         }
     },{
         timestamps:true

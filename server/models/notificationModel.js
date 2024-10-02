@@ -12,6 +12,8 @@ const notificationSchema = new mongoose.Schema(
                 "Course",
                 "Chat",
                 "General",
+                "Important",
+                "CodeHub"
             ]
         },
         text:{

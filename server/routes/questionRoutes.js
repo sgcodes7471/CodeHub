@@ -3,7 +3,7 @@ import {getQuestions , getQuestionById , addQuestion , likeQuestion , bookmarkQu
 
 const router = express.Router();
 
-router.get('/' , getQuestions)
+router.get('/:page' , getQuestions)
 router.get('/:qid' , getQuestionById);
 router.post('/add-question' , addQuestion)
 router.post('/:qid/like-question' , likeQuestion)

@@ -3,14 +3,15 @@ import mongoose from "mongoose";
 const questionSchema = new mongoose.Schema(
     {
         userId:{
-            type:String,
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',
             required:true
         },
         tags:[{
             type:String,
             lowercase:true
         }],
-        name:{
+        username:{
             type:String,
             required:true
         },
@@ -25,16 +26,16 @@ const questionSchema = new mongoose.Schema(
         code:{
             type:String
         },
-        visibility:{
-            type:Boolean,
-            required:true
-        },
         language:{
             type:String,
             required:true
         },
         upvotes:{
             type:Number,
+            default:0
+        },
+        date:{
+            type:String,
             required:true
         }
     },{
