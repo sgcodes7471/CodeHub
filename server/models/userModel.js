@@ -30,6 +30,18 @@ const userSchema = new mongoose.Schema(
         },
         online:{
             type:Boolean
+        },
+        notificationAdjust:{
+            type:'IMP' || 'ALL' || 'NONE',
+            default:'ALL'
+        },
+        verified:{
+            type:Boolean,
+            default:false
+        },
+        passwordAllowance:{
+            type:Boolean,
+            default:false
         }
     },{
         timestamps:true
@@ -93,16 +105,5 @@ userSchema.methods.generateRefreshToken=function(){
   }
 }
 
-userSchema.methods.generateOTP = function (){
-    try{
-        const otp = parseInt(crypto.randomBytes(4).toString('hex').slice( 0 , 4) , 16).toString().slice(0 , 4)
-        console.log(otp)
-        return otp;
-        
-    }catch(error){
-        console.log("Error is generating OTP")
-        throw error
-    }
-}
 
 export const User=mongoose.model("User"  , userSchema);
