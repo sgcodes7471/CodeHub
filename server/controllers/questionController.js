@@ -6,11 +6,11 @@ import { Upvote } from '../models/upvoteModel.js'
 
 const getQuestions = async (req, res)=>{
     try {
-        let questions = await RedisGet({key:'Questions'})
+        let questions = await RedisGet({key:`Questions`})
         if(!questions){ 
             questions = await Question.find().sort({createdAt:-1}).exec()
-            RedisSet({key:'Questions' , value:questions , ex:60})
-        }
+            RedisSet({key:`Questions` , value:JSON.stringify(questions) , ex:60})
+        }else questions = JSON.parse(questions)
         const page = req.params.page
         questions = questions.slice((page-1)*20 , page*20+1);
         return res.status(200).json({error:false,message:'Success',questions:questions})
@@ -158,12 +158,13 @@ const editQuestion = async (req, res)=>{
 }
 const searchQuestion = async (req, res)=>{
     const key = req.queryParams
-    let questions = await RedisGet({key:'Questions'})
+    const userId = req.user._id
+    let questions = await RedisGet({key:`${userId}/Questions`})
     if(!questions){ 
         questions = await Question.find().sort({createdAt:-1}).exec()
-        RedisSet({key:'Questions' , value:questions , ex:60})
+        RedisSet({key:`${userId}/Questions` , value:questions , ex:60})
     }
-    //learn something like elastico
+    //learn something like elasticSearch
 }
 
 export {getQuestions , getQuestionById , addQuestion , likeQuestion , bookmarkQuestion , deleteQuestion , editQuestion , searchQuestion }

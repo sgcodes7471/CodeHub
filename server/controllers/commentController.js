@@ -4,11 +4,12 @@ import { Upvote } from "../models/upvoteModel.js"
 
 const getComments = async()=>{
     const questionId = req.params.qid
-    let comments = await RedisGet({key:`Comments:${questionId}`})
+    const userId = req.user._id
+    let comments = await RedisGet({key:`${userId}/Comments:${questionId}`});
     if(!comments){ 
         comments = await await Comment.findMany({questionId:questionId}).sort({upvotes:-1 , createdAt:-1}).exec()
-        RedisSet({key:`Comments:${questionId}` , value:comments , ex:60})
-    }
+        RedisSet({key:`${userId}/Comments:${questionId}` , value:JSON.stringify(comments) , ex:60})
+    }else comments=JSON.parse(comments)
     const page = req.params.page
     comments = comments.slice((page-1)*20 , page*20+1);
     return res.status(200).json({error:false,message:'Success',comments:comments})

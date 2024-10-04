@@ -1,4 +1,7 @@
 const becomeEducator = async()=>{
     
 }
-export {becomeEducator}
+
+const getEducatorById = async()=>{}
+const getTopEducator = async()=>{}
+export {becomeEducator , getEducatorById , getTopEducator}
