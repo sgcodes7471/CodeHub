@@ -21,12 +21,7 @@ const app = express()
 const server = http.createServer(app);
 const socketService = new SocketService()
 const io = socketService.io
-io.attach(server,{
-  cors: {
-    origin: [LOCALHOST_URL, DEPLOYED_URL],
-    methods: ["GET", "POST"]
-  }
-})
+io.attach(server)
 
 app.use(
     cors({

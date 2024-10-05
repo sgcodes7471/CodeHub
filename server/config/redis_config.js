@@ -1,12 +1,26 @@
 import redis from 'redis'
 
 let redisClient;
+let pubClient;
+let subClient;
 
 (async () => {
-  redisClient = redis.createClient();
-  redisClient.on("error", (error) => console.error(`Error in connecting to Redis:\n${error}`));
-  console.log('Redis running on 6379')
-  await redisClient.connect();
+  try {
+    redisClient = redis.createClient();
+    pubClient = redis.createClient();
+    subClient = redis.createClient();
+  
+    redisClient.on("error", (error) => console.error(`Error in connecting to Redis:\n${error}`));
+    pubClient.on("error", (error) => console.error(`Error in connecting to RedisPub:\n${error}`));
+    subClient.on("error", (error) => console.error(`Error in connecting to RedisSub:\n${error}`));
+  
+    console.log('Redis running on 6379')
+    await redisClient.connect();
+    await pubClient.connect();
+    await subClient.connect();
+  } catch (error) {
+    console.log('Some Error Occured in Redis')
+  }
 })();
 
 async function RedisSet({key , value , ex}){
@@ -26,13 +40,14 @@ async function RedisDel({key}){
   })
 }
 
-async function RedisPush({ key, value }) {
+async function RedisPush({key, value}){
   await redisClient.rPush(key, value)
 }
 
-async function RedisPull({ key }) {
+async function RedisPull({key}){
   const messages = await redisClient.lRange(key, 0, -1)
   return messages;
 }
 
-export {redisClient , RedisDel , RedisGet , RedisSet , RedisPush , RedisPull} 
+
+export {redisClient , pubClient , subClient , RedisDel , RedisGet , RedisSet , RedisPush , RedisPull} 
