@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema(
     {
-        ownerId:{
+        adminId:{
             type:mongoose.Schema.Types.ObjectId,
             ref:'User',
             required:true
+        },
+        subAdminId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',
+            default:null
         },
         participants:[{
             type:mongoose.Schema.Types.ObjectId,
@@ -28,4 +33,4 @@ const roomSchema = new mongoose.Schema(
     }
 )
 
-export const Upvote = mongoose.model("Room" , roomSchema);
+export const Room = mongoose.model("Room" , roomSchema);
