@@ -1,4 +1,4 @@
-import express from "expresss";
+import express from "express";
 import {getProfile , editProfile , deleteProfile , getProfileById , Logout , refreshToken , getNotifications , getBookmarks , getQuestions} from '../controllers/userController.js'
 
 const router = express.Router();

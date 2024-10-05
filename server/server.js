@@ -4,6 +4,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import http from 'http'
+import { LOCALHOST_URL , DEPLOYED_URL } from './constants.js';
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import questionRoutes from './routes/questionRoutes.js'
@@ -12,12 +14,23 @@ import roomRoutes from './routes/roomRoutes.js'
 import educatorRoutes from './routes/educatorRoutes.js'
 import courseRoutes from './routes/courseRoutes.js'
 import videoRouters from './routes/videoRoutes.js'
+import SocketService from './socket/socket.js';
 
 const app = express()
 
+const server = http.createServer(app);
+const socketService = new SocketService()
+const io = socketService.io
+io.attach(server,{
+  cors: {
+    origin: [LOCALHOST_URL, DEPLOYED_URL],
+    methods: ["GET", "POST"]
+  }
+})
+
 app.use(
     cors({
-      origin: "*",
+      origin: [LOCALHOST_URL, DEPLOYED_URL],
       credentials: true,
     }),
 );
@@ -27,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(cookieParser());
 
-app.get("/check", (req, res) => {
+app.get("/check/:value", (req, res) => {
     return res.json({ message: "server is alive" });
 });
 
@@ -40,9 +53,13 @@ app.use('/educator' , educatorRoutes);
 app.use('/course' , courseRoutes);
 app.use('/video' , videoRouters);
 
+app.get("*" , (req, res)=>{
+  return res.status(404).send('ERROR 404!\nPage Not Found')
+})
+
 app.listen(data.PORT, async () => {
     await connectToDb();
-    console.log(`Server is running on ${data.PORT}`);
+    console.log(`Server running on ${data.PORT}`);
 });
 
 //flow of work:

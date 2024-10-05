@@ -5,6 +5,7 @@ let redisClient;
 (async () => {
   redisClient = redis.createClient();
   redisClient.on("error", (error) => console.error(`Error in connecting to Redis:\n${error}`));
+  console.log('Redis running on 6379')
   await redisClient.connect();
 })();
 
@@ -25,4 +26,13 @@ async function RedisDel({key}){
   })
 }
 
-export {redisClient , RedisDel , RedisGet , RedisSet} 
+async function RedisPush({ key, value }) {
+  await redisClient.rPush(key, value)
+}
+
+async function RedisPull({ key }) {
+  const messages = await redisClient.lRange(key, 0, -1)
+  return messages;
+}
+
+export {redisClient , RedisDel , RedisGet , RedisSet , RedisPush , RedisPull} 

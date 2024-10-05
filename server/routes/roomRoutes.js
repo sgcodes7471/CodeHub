@@ -1,4 +1,4 @@
-import express from "expresss";
+import express from "express";
 import {getMyRooms , getChats , createRoom , joinRoomRequest , getRoomRequest , handleRoomRequest , leaveRoom ,
      searchRoom , deleteRoom , getParticipants , removeParticipant} from '../controllers/roomController.js'
 

@@ -4,7 +4,7 @@ async function connectToDb() {
   try {
     if (data.NODE_ENV == "development") {
       await mongoose.connect(data.DB);
-      console.log("Connection established!");
+      console.log("Mongo running on 27017");
     } else {
       console.log("we are not ready with the other url");
     }

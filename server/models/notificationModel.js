@@ -29,4 +29,4 @@ const notificationSchema = new mongoose.Schema(
     }
 )
 
-export const Upvote = mongoose.model("Notification" , notificationSchema);
+export const Notification = mongoose.model("Notification" , notificationSchema);

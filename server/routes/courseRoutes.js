@@ -4,7 +4,7 @@ import {addCourse , editCourse , getCourseById , getPurchasedCourses , getMyCour
 const router = express.Router()
 
 router.post('/add-course' , addCourse)
-router.edit('/:cid/edit-course' , editCourse)
+router.put('/:cid/edit-course' , editCourse)
 router.get('/:cid' , getCourseById)
 router.get('/purchased-courses' , getPurchasedCourses)
 router.get('/my-courses' , getMyCourses)

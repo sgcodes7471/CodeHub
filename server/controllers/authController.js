@@ -1,4 +1,4 @@
-import User from '../models/userModel.js'
+import {User} from '../models/userModel.js'
 import otpGenerate from '../utils/otpUtil.js';
 import mailUtil from '../utils/emailUtil.js';
 import { RedisDel, RedisGet, RedisSet} from '../config/redis_config.js'

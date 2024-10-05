@@ -32,7 +32,8 @@ const userSchema = new mongoose.Schema(
             type:Boolean
         },
         notificationAdjust:{
-            type:'IMP' || 'ALL' || 'NONE',
+            type:String,
+            enum:["All" ,"IMP" , "NONE"],
             default:'ALL'
         },
         verified:{

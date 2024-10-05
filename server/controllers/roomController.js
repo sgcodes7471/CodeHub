@@ -1,5 +1,5 @@
-import { RedisDel, RedisGet, RedisSet } from "../config/redis_config"
-import { Room } from "../models/roomModel"
+import { RedisDel, RedisGet, RedisSet } from "../config/redis_config.js"
+import { Room } from "../models/roomModel.js"
 import {Chat} from '../models/chatModel.js'
 
 const getMyRooms = async(req, res)=>{
@@ -20,15 +20,15 @@ const getChats = async(req, res)=>{
     try {
         const userId = req.params.rid
         const roomId = req.params.rid 
-        let chatsLogs = await RedisGet({key:`${roomId}/chats`})
-        if(!chatsLogs){
+        // let chatsLogs = await RedisGet({key:`${roomId}/chats`})
+        // if(!chatsLogs){
             const room = await Room.findById(roomId).populate('chats')
             if(!room) return res.status(404).json({error:true, message:'Room Not Found'})
             if(!((room.participants).includes(userId))) 
                 return res.status(401).json({error:true , message:'Not a Participant'})
-            chatsLogs = room.chats
-            await RedisSet({key:`${roomId}/chats`,value:JSON.stringify(chatsLogs),ex:60})
-        }else chatsLogs = JSON.parse(chatsLogs)
+            const chatsLogs = room.chats
+            // await RedisSet({key:`${roomId}/chats`,value:JSON.stringify(chatsLogs),ex:60})
+        // }else chatsLogs = JSON.parse(chatsLogs)
         
         return res.status(200).json({error:false , message:'Success' , chats:chatsLogs})
     } catch (error) {
