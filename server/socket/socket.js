@@ -1,8 +1,7 @@
 import {Server} from 'socket.io' 
-import { Chat } from '../models/chatModel.js'
-import { Room } from '../models/roomModel.js'
 import { pubClient , subClient } from '../config/redis_config.js'
 import { LOCALHOST_URL , DEPLOYED_URL } from '../constants.js'
+import { produceChat } from '../config/kafka_config.js'
 
 class SocketService{
     constructor(){
@@ -29,10 +28,16 @@ class SocketService{
                 }
                 // io.to(roomId).emit('message', chatMessage)
                 await pubClient.publish(`chats:${roomId}` , JSON.stringify(chatMessage))
-                const newChat = await Chat.create(chatMessage)
-                const room = await Room.findById(roomId)
-                room.chats.push(newChat._id)
-                await room.save({validateBeforeSave:true})
+                // const newChat = await Chat.create(chatMessage)
+                // const room = await Room.findById(roomId)
+                // room.chats.push(newChat._id)
+                // await room.save({validateBeforeSave:true})
+                await produceChat({chatMessage,roomId})
+                console.log(`Chat produced`)
+            })
+            socket.on('disconnect',()=>{
+                subClient.unsubscribe(`chats:${roomId}`)
+                console.log(`${socket.id} left`)
             })
         })
 

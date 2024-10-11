@@ -15,9 +15,11 @@ import educatorRoutes from './routes/educatorRoutes.js'
 import courseRoutes from './routes/courseRoutes.js'
 import videoRouters from './routes/videoRoutes.js'
 import SocketService from './socket/socket.js';
+import { consumeChat } from './config/kafka_config.js';
 
 const app = express()
 
+consumeChat()
 const server = http.createServer(app);
 const socketService = new SocketService()
 const io = socketService.io
