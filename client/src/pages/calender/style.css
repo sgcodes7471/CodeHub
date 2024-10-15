@@ -1,0 +1,47 @@
+.body-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .calender-block-wrapper{
+    background-color: white;
+    padding:4vh 3vh;
+    border-radius: 2vh;
+    height: fit-content;
+    height: 60vh;
+  }
+  .contests-wrapper{
+    width: 25vw;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px;
+    text-wrap: wrap;
+    background-color: #fff;
+    height: 60vh;
+    overflow-y: scroll;
+  }
+  .contest-card{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px 0px;
+  }
+  .contest-card:hover{
+    border: none;
+    background-color: #FF786B;
+    color: white;
+    cursor: pointer;
+  }
+  .calender-day{
+    width: 6vw;
+    font-weight: bolder;
+    text-align: center;
+  }
+  .calender-wrapper{
+    margin: 0px 5vw;
+    display: flex;
+    width: 100%;
+    height:70vh;
+    justify-content: center;
+    align-items: center;
+  }
