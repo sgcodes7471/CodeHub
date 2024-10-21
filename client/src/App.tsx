@@ -5,10 +5,12 @@ import Dashboard from "./pages/dashboard"
 import Profile from "./pages/profile"
 import AddQuestion from "./pages/addQuestion"
 import Calender from "./pages/calender"
+import ChatRoom from "./pages/chatRooms"
+import { UserContextProvider } from "./context/userContext"
 
 function App() {
   return(
-    <>
+    <UserContextProvider>
     <BrowserRouter>
     {/* <PreNavbar/> */}
     <Navbar/>
@@ -17,9 +19,10 @@ function App() {
         <Route path="/Home" element={<Dashboard/>}/>
         <Route path="/Add-Question" element={<AddQuestion/>}/>
         <Route path="/Calender" element={<Calender/>}/>
+        <Route path="/ChatRoom" element={<ChatRoom/>}/>
     </Routes>
     </BrowserRouter>
-    </>
+    </UserContextProvider>
   )
 }
 
