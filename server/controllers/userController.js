@@ -37,15 +37,12 @@ const getQuestions = async (req, res)=>{
 const editProfile = async(req , res)=>{
     try{
         const userId = req.user._id
-        const {techStack,language,codeforces,leetcode,codechef} = req.body
+        const {techStack,language} = req.body
        
         const user = await User.findById(userId)
         
         user.techStack=techStack
         user.language = language
-        user.ratingCodeForces = codeforces
-        user.ratingCodeChef = codechef
-        user.ratingLeetCode=leetcode
         
         await user.save({validateBeforSave:false});
         return res.status(200).json({error:false,message:"Changes Saved!"})
@@ -53,6 +50,51 @@ const editProfile = async(req , res)=>{
         return res.status(505).json({error:true,message:"Internal Server Error Occured"})
     }
 }
+
+//post
+const linkCodeforces = async (req , res)=>{
+    try {
+        const {cfId} = req.body
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        const url = `https://codeforces.com/api/user.rating?handle=${cfId}`
+        const respone  = await fetch(url , {method:'GET'})
+        const data = await respone.json()
+        if(!data.result) return res.status(404).json({error:true , message:'User does not exist on CF'})
+        //look into the case of unrated
+        const cfRating = (data.result[(data.result).length - 1]).newRating
+        user.codeForces = cfId
+        user.cfRating = cfRating
+        await user.save({validateBeforSave:false});
+        return res.status(200).json({error:false,message:'Success'})
+    } catch (error) {
+        return res.status(505).json({error:true,message:"Internal Server Error Occured"})
+    }
+}
+
+
+const updateCodeforces = async (req ,res)=>{
+    /*on every refresh of the profile page, the a request to codeforces api is made. If the rating changes then
+    it makes a put request to controller to update it on the database*/
+    try {
+        const {cfRating} = req.body
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        const url = `https://codeforces.com/api/user.rating?handle=${user.codeForces}`
+        const respone  = await fetch(url , {method:'GET'})
+        const data = await respone.json()
+        if(!data.result) return res.status(404).json({error:true , message:'User does not exist on CF'})
+        if((data.result[(data.result).length - 1]).newRating !== cfRating)
+            return res.status(401).json({error:true , message:'Rating did not match'})
+        user.codeForces = cfId
+        user.cfRating = cfRating
+        await user.save({validateBeforSave:false});
+        return res.status(200).json({error:false,message:'Success'})
+    } catch (error) {
+        return res.status(505).json({error:true,message:"Internal Server Error Occured"})
+    }
+}
+
 
 const deleteProfile = async(req, res)=>{
     try {
@@ -143,4 +185,5 @@ const getNotifications = async()=>{
     }
 }
 
-export {getProfile , editProfile , deleteProfile , getProfileById , Logout , refreshToken , getNotifications , getBookmarks , getQuestions}
+export {getProfile , editProfile , deleteProfile , getProfileById , Logout , refreshToken ,
+     getNotifications , getBookmarks , getQuestions , linkCodeforces , updateCodeforces}

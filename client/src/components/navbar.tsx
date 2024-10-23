@@ -36,7 +36,7 @@ const Navbar:React.FC = ()=>{
             [search , profile , add].map((url , index)=>{
                 return(
                     <div className='navbar-drop-down w-10 h-10 absolute my-2 flex flex-col justify-around items-center transition duration-500' 
-                    style={{borderRadius:'100%',transform:drop?`translateY(${3*index}rem)`:'translateY(-3rem)',opacity:drop?1:0}}
+                    style={{borderRadius:'100%',transform:drop?`translateY(${3*index}rem)`:'translateY(-3rem)',opacity:drop?1:0,zIndex:'200'}}
                     onClick={()=>{navigate(index===1?'/Profile':(index===2?'/Add-Question':''))}}>
                         <img src={url} alt="" className='w-6'/>
                     </div>

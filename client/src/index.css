@@ -13,7 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 body{
-  background: tan;
+  /* background: tan; */
+  background: url('assets/bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow-x: hidden;
 }
 .page-wrapper{

@@ -1,5 +1,6 @@
 import ChatArea from "../../components/chatArea.js"
 import Rooms from "../../components/rooms"
+import RoomSearch from "../../components/roomSearch.js"
 import { ChatContextProvider } from "../../context/chatContext.js"
 
 const ChatRoom:React.FC=()=>{
@@ -8,6 +9,7 @@ const ChatRoom:React.FC=()=>{
         <div className="page-wrapper flex justify-between" >
             <Rooms/>
             <ChatArea/>
+            <RoomSearch/>
         </div>
         </ChatContextProvider>
     )

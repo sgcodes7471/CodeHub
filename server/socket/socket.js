@@ -1,7 +1,7 @@
 import {Server} from 'socket.io' 
 import { pubClient , subClient } from '../config/redis_config.js'
 import { LOCALHOST_URL , DEPLOYED_URL } from '../constants.js'
-import { produceChat } from '../config/kafka_config.js'
+import { produceChat } from '../kafka/chat.js'
 
 class SocketService{
     constructor(){

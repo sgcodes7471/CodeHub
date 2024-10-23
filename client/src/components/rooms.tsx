@@ -11,8 +11,8 @@ const Rooms:React.FC=()=>{
     
 
     return(
-        <div className="flex flex-col border-2 border-white rounded-lg px-3 w-1/4" 
-        style={{overflowY:'scroll', height:'70vh'}}>
+        <div className=" card flex flex-col border-2 border-white rounded-lg px-3 w-1/4" 
+        style={{overflowY:'scroll', borderRadius:'20px' ,height:'70vh'}}>
             {
                 rooms.map((room:Room)=>{
                     return(

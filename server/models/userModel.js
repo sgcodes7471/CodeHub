@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
+import { type } from 'os';
 const userSchema = new mongoose.Schema(
     {
         username:{
@@ -31,18 +32,24 @@ const userSchema = new mongoose.Schema(
         online:{
             type:Boolean
         },
-        notificationAdjust:{
+        notificationAdjust:[{
             type:String,
-            enum:["All" ,"IMP" , "NONE"],
+            enum:["ALL" ,"IMP" , "NONE" , "GEN" , "CHAT" ,"COURSE" , "CF"],
             default:'ALL'
-        },
+        }],
         verified:{
             type:Boolean,
             default:false
         },
-        passwordAllowance:{
-            type:Boolean,
-            default:false
+        codeForces:{
+            type:String,
+        },
+        cfRating:{
+            type:Number
+        },
+        contributions:{
+            type:Number,
+            default:0
         }
     },{
         timestamps:true

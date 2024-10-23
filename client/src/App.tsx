@@ -7,6 +7,7 @@ import AddQuestion from "./pages/addQuestion"
 import Calender from "./pages/calender"
 import ChatRoom from "./pages/chatRooms"
 import { UserContextProvider } from "./context/userContext"
+import Question from "./pages/question"
 
 function App() {
   return(
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Add-Question" element={<AddQuestion/>}/>
         <Route path="/Calender" element={<Calender/>}/>
         <Route path="/ChatRoom" element={<ChatRoom/>}/>
+        <Route path="/Question/:qid" element={<Question/>}/>
     </Routes>
     </BrowserRouter>
     </UserContextProvider>

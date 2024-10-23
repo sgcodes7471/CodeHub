@@ -27,10 +27,30 @@ const ProfileEdit:React.FC<Props> = ({setEditing})=>{
                 placeholder='Enter your New TechStack' onChange={(e:ChangeEvent<HTMLInputElement>)=>{setTechStack(e.target.value)}}/>
                 
                 <div className='flex flex-col items-start my-2'> 
-                <label className='inline-flex items-center'><input type='checkbox' name='notification' value='all' className='inline-block'/> <span className='text-lg'>Allow All Notifications</span></label>
-                <label className='inline-flex items-center'><input type='checkbox' name='notification' value='imp' className='inline-block'/> <span className='text-lg'>Allow only Important Notifications</span></label>
-                <label className='inline-flex items-center'><input type='checkbox' name='notification' value='general' className='inline-block'/> <span className='text-lg'>Allow only General Notifications</span></label>
-                <label className='inline-flex items-center'><input type='checkbox' name='notification' value='chat' className='inline-block'/> <span className='text-lg'>Allow Chats General Notifications</span></label>
+                <label className='inline-flex items-center'>
+                <input type='checkbox' name='notification' value='all' className='inline-block' 
+                onChange={()=>{setNotification('ALL')}}/> 
+                <span className='text-lg'>Allow All Notifications</span></label>
+
+                <label className='inline-flex items-center'>
+                <input type='checkbox' name='notification' value='imp' className='inline-block' 
+                onChange={()=>{setNotification(notification=>notification+' IMP')}}/> 
+                <span className='text-lg'>Allow Important Notifications</span></label>
+
+                <label className='inline-flex items-center'>
+                <input type='checkbox' name='notification' value='general' className='inline-block'  
+                onChange={()=>{setNotification(notification=>notification+' GEN')}}/> 
+                <span className='text-lg'>Allow General Notifications</span></label>
+
+                <label className='inline-flex items-center'>
+                <input type='checkbox' name='notification' value='chat' className='inline-block'  
+                onChange={()=>{setNotification(notification=>notification+' CHAT')}}/> 
+                <span className='text-lg'>Allow Chats Notifications</span></label>
+                
+                <label className='inline-flex items-center'>
+                <input type='checkbox' name='notification' value='course' className='inline-block'  
+                onChange={()=>{setNotification(notification=>notification+' COURSE')}}/> 
+                <span className='text-lg'>Allow Course Notifications</span></label>
                 </div>
 
                 <input type='submit' value='Save' onClick={handleSubmit}

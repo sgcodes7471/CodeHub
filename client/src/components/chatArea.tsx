@@ -7,6 +7,9 @@ import send from '../assets/send.svg'
 import trash from '../assets/trash.svg'
 import leave from '../assets/leave.svg'
 import Message from "./message";
+import RoomParticipantsList from "./roomParticipants";
+import RoomRequestsList from "./roomRequests";
+import RoomDialog from "./roomDialog";
 
 const ChatArea:React.FC = ()=>{
 
@@ -31,6 +34,11 @@ const ChatArea:React.FC = ()=>{
     }
 
     return(
+        <>
+        {participants && <RoomParticipantsList list={current?.participants} close={openParticipants}/>}
+        {requests && <RoomRequestsList list={current?.requests} close={openRequests}/>}
+        {leaves && <RoomDialog close={openLeaves} action="Leave"/>}
+        {del && <RoomDialog close={openDel} action="Delete"/>}
         <div className="card flex flex-col border-2 border-white justify-center rounded-lg px-3 relative"
         style={{overflowX:"hidden" , height:'70vh', width:'45vw' , borderRadius:'20px'}}>
             {!current? 
@@ -86,7 +94,7 @@ const ChatArea:React.FC = ()=>{
             </> 
             }
             
-        </div>
+        </div></>
     )
 }
 export default ChatArea

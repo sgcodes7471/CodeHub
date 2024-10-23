@@ -6,7 +6,7 @@ const pool = new Pool({
     host:data.POSTGRES_AIVEN_HOST,
     database:'defaultdb',
     password:data.POSTGRES_AIVEN_PASSWORD,
-    port:data.POSTGRES_AIVEN_PASSWORD
+    port:data.POSTGRES_AIVEN_PORT
 })
 
 export async function saveChats(chatMessage) {

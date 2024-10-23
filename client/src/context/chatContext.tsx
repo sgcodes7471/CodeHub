@@ -15,7 +15,7 @@ export interface Messages {
     attachmentType:string|null
     timeSent:string,
     username:string|undefined,
-    reactions:[Reactions] | []
+    reactions:Reactions[] | []
 }
 
 
@@ -26,8 +26,8 @@ export interface Room {
     subAdminId:string|null|undefined,
     name:string,
     chats:Messages[]|[],
-    participants:[User]|[],
-    requests:[User]|[],
+    participants:User[]|[],
+    requests:User[]|[],
     read:boolean
 }
 
@@ -86,7 +86,28 @@ export const ChatContextProvider = ({children}:ChatContextProviderProps)=>{
                 reactions:[]},
 
             ] , participants:[] , requests:[] , read:false},
-            {_id : "2" , profile:"" , adminId:"1" , subAdminId:"" , name:"Room2" , chats:[] , participants:[] , requests:[] , read:false},
+            {_id : "2" , profile:"" , adminId:"1" , subAdminId:"" , name:"Room2" , chats:[] , participants:[
+                {
+                    _id:'1',
+                    username:"srinjoy",
+                    techStack:"TypeScript,MERN,Next",
+                    language:'Java'
+                },
+                {
+                    _id:'2',
+                    username:"demo",
+                    techStack:"TypeScript,MERN,Next",
+                    language:'Java'
+                }
+            ] , 
+                requests:[
+                    {
+                        _id:'4',
+                        username:"demo2",
+                        techStack:"TypeScript,MERN,Next",
+                        language:'Java'
+                    },
+                ] , read:false},
             {_id : "3" , profile:"" , adminId:"" , subAdminId:"" , name:"Room3" , chats:[] , participants:[] , requests:[] , read:true},
             {_id : "4" , profile:"" , adminId:"" , subAdminId:"" , name:"Room4" , chats:[] , participants:[] , requests:[] , read:false},
             {_id : "5" , profile:"" , adminId:"" , subAdminId:"" , name:"Room5" , chats:[] , participants:[] , requests:[] , read:true},

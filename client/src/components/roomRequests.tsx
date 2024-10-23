@@ -8,7 +8,7 @@ interface Props {
     close:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RoomParticipantsList:React.FC<Props> = ({list,close})=>{
+const RoomRequestsList:React.FC<Props> = ({list,close})=>{
 
     const chatContext = useContext(ChatContext)
     const userContext = useContext(UserContext)
@@ -26,7 +26,12 @@ const RoomParticipantsList:React.FC<Props> = ({list,close})=>{
                 return(
                     <div key={index} className="w-full py-2 px-8 text-xl flex items-center justify-between">
                         {item.username}
-                        {current?.adminId === user?._id && <button className="text-sm px-2 py-1 border-2 rounded-lg bg-red-600 text-white">Remove</button>}
+                        {current?.adminId === user?._id && 
+                        <div>
+                        <button className="text-sm px-2 py-1 border-2 rounded-lg bg-green-600 text-white">Accept</button>
+                        <button className="text-sm px-2 py-1 border-2 rounded-lg bg-red-600 text-white">Reject</button>
+                        </div>
+                        }
                     </div>
                 )
             })
@@ -36,4 +41,4 @@ const RoomParticipantsList:React.FC<Props> = ({list,close})=>{
     )
 }
 
-export default RoomParticipantsList
+export default RoomRequestsList

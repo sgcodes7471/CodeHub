@@ -9,11 +9,7 @@ const notificationSchema = new mongoose.Schema(
         field:{
             type:String,
             enum:[
-                "Course",
-                "Chat",
-                "General",
-                "Important",
-                "CodeHub"
+                "ALL" , "IMP" , "GEN" , "CHAT" , "COURSE"
             ]
         },
         text:{
