@@ -70,6 +70,7 @@ const joinRoomRequest = async(req, res)=>{
         (room.requests).push(userId)
         await room.save({validateBeforeSave:false})
         await RedisSet({key:`${roomId}/Rooms` , value:JSON.stringify(room) , ex:60})
+        //add kafka for CHAT
         return res.status(200).json({error:false, message:'Request Made'})
     } catch (error) {
         return res.status(500).json({error:true, message:'Server error occured'})
@@ -125,6 +126,7 @@ const handleRoomRequest = async(req, res)=>{
     if(choice) room.participants.push(requestId)
     await room.save({validateBeforeSave:false})
     await RedisSet({key:`${roomId}/Rooms` , value:JSON.stringify(room) , ex:60})
+    //add kafka for CHAT
     return res.status(200).json({error:false, message:'Success'})
 }
 
@@ -201,6 +203,7 @@ const removeParticipant = async(req, res)=>{
     room.participants.pull(removeId)
     await room.save({validateBeforeSave:true})
     await RedisSet({key:`${roomId}/Rooms` , value:JSON.stringify(room) , ex:60})
+    //add kafka for CHAT
     return res.status(200).json({error:false , message:'Success'})
 }
 

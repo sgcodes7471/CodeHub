@@ -29,6 +29,7 @@ const addComment = async()=>{
         const user = await User.findById(userId)
 
         const newComment = await Comment.create({userId:userId,questionId:questionId,username:user.username,comment:comment,date:`${day}/${month}/${year}`})
+        //implement kafka for GEN
         if(!newComment) return res.status(200).json({error:true, message:'Server Error Occured'})
     
         return res.status(200).json({error:false,message:"Success",newComment:newComment})
@@ -59,6 +60,7 @@ const likeComment = async()=>{
         const currentUpvotes = comment.upvotes +1;
         comment.upvotes = currentUpvotes
         const newUpvoteCount = await comment.save({validateBeforeSave:false})
+        //Kafka for GEN
         return res.status(200).json({error:false,message:"Answer Upvoted Successfully",newUpvotes:newUpvoteCount.upvote})
     }catch(error){
         return res.status(500).json({error:true,message:'server error occured'})

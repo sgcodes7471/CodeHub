@@ -92,6 +92,7 @@ const likeQuestion = async (req, res)=>{
         await question.save({validateBeforeSave:false})
         return res.status(200)
         .json({error:false,message:"Question Upvoted Successfully",newUpvotes:currentUpvotes})
+        //kafka for GEN
     }catch(error){
         return res.status(500).json({error:true,message:"Server Error Occured"})
     }
