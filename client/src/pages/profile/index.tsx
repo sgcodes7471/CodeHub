@@ -6,7 +6,7 @@ const Profile:React.FC = ()=>{
     return(
         <div className='page-wrapper'>
         <ProfileCard/>
-        <div className="card w-1/2 h-full font-semibold p-4 flex flex-col items-center justify-center" style={{margin:'5vh 0px'}}>
+        <div className="card w-full h-full font-semibold p-4 flex flex-col items-center justify-center" style={{margin:'5vh 0px'}}>
         <Feed purpose={'My Questions'}/>
         </div>
         </div>

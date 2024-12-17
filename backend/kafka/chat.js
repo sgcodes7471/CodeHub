@@ -1,6 +1,6 @@
-import kafka from "../config/kafka_config";
-import { createProducer } from "../config/kafka_config";
-import { Chat } from "../models/chatModel";
+import kafka from "../config/kafka_config.js";
+import { createProducer } from "../config/kafka_config.js";
+import { Chat } from "../models/chatModel.js";
 import { Room } from '../models/roomModel.js'
 
 export async function produceChat({chatMessage,roomId}) {
@@ -32,7 +32,7 @@ export async function consumeChat() {
                     pause()
                     setTimeout(()=>{
                         consumer.resume([{topic:'CHATS'}])
-                    },60*1000)      
+                    },6*1000)      
                 }
             }
         })

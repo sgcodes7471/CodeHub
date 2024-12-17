@@ -12,13 +12,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html{
+  
+}
 body{
   /* background: tan; */
-  background: url('assets/bg.jpg');
-  background-position: center;
+  /* background: url('assets/bg.avif'); */
+  /* background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
-  overflow-x: hidden;
+  overflow-x: hidden; */
+  /* background-repeat: no-repeat; */
+  background: linear-gradient(to bottom , rgb(58, 58, 255) , rgb(210, 210, 255));
+  min-height: 100vh;
 }
 .page-wrapper{
   padding: 10vh 5vw;
@@ -30,4 +35,10 @@ body{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 50px;
+}
+
+.input{
+  width: 100%;
+  text-align: center;
+  padding: 5px;
 }

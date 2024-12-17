@@ -26,7 +26,7 @@ export const UserContextProvider = ({children}:UserContextProviderProps)=>{
             techStack:"TypeScript,MERN,Next",
             language:'Java'
         }
-        setUser(u)
+        setUser(u);
     },[])
     return(
         <UserContext.Provider value={{user , setUser}}>

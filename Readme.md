@@ -1,26 +1,80 @@
-# CodeHub
+## CodeHub is a highly scalable and reliable webApp based on Event Driven Architecture. It promotes collaborativeness among programmers.
 
--	Users create accounts, authenticate, post coding questions and engage in discussion via commenting.
--	Users can communicate with other users and also in Chatrooms via text or images or via video calls in real-time, implemented Socket IO and WebRTC, made scalable by caching of conversations opened in last 15minutes using Redis.
--	An Online Code Compiler and Contest Calender that informs about upcoming coding contest. 
--	Users can register as Educators and launch their courses by uploading videos and lecture notes and other users can purchase those courses using UPI payment gateway.
--	Contarization using Docker and deployed in cloud using Kubernetes ensuring scalability.
+## Directory Structure for servers
+### There are Four Servers running separately fulfilling different purpose
+```
+server/  #monolithic server for fetching requests and caching on redis; runs on PORT-8000 by default
+├── node_modules/
+├── src/
+|    ├── config/ 
+|    ├── controllers/
+|    ├── middlewares/
+|    ├── routes/
+|    ├── utils/
+|    ├── index.ts
+|    ├── type.ts
+├── .env
+├── .env.sample
+├── .gitignore
+├── package.json
+├── package.lock.json
 
+socket/ #server based on pub-sub model for chatroom; runs on PORT-8001 by default
+├── node_modules/
+├── src/
+|    ├── config/
+|    ├── index.ts
+|    ├── type.ts
+├── .env
+├── .env.sample
+├── .gitignore
+├── package.json
+├── package.lock.json
 
-# Deployment 
- 
--   The Server will be deployed on render and the client side will be deployed on vercel.
--   The Links will be added in due time
+producer/ #produces events on topic of for db write/update operations; runs on PORT-8004 by default
+├── node_modules/
+├── src/
+|    ├── config/
+|    ├── services/
+|    ├── index.ts
+|    ├── type.ts
+├── .env
+├── .env.sample
+├── .gitignore
+├── package.json
+├── package.lock.json
 
+consumer/ #consumes the events from topics of kafka to write/update in bulk in db; runs on PORT-8005 by default
+├── node_modules/
+├── src/
+|    ├── config/
+|    ├── services
+|    ├── index.ts
+|    ├── type.ts
+├── .env
+├── .env.sample
+├── .gitignore
+├── package.json
+├── package.lock.json
+```
 
-# Running on local system
+## Set Up for Developement
+The .env files are supposed to be made by following the .env.sample
 
--   First npm i all the dependencies
--   Next add a file in the server directory named .env (it should be exaclty .env)
--   Now add the following info in .env file:
-    DB= <br/>
-    PORT= <br/>
-    ACCESS_TOKEN_SECRET= <br/>
-    REFRESH_TOKEN_SECRET= <br/>
-    ACCESS_TOKEN_EXPIRY= <br/>
-    REFRESH_TOKEN_EXPIRY= <br/>
+### To start the server locally
+```
+cd <directory>
+npm install
+npm run dev
+```
+
+### To start the client UI locally
+```
+cd client
+npm i
+npm run dev
+```
+
+## Guidelines for contribution
+### Thanks a lot in case you wish to contribute to our repository
+### <ul><li>1. Fork it</li><li>2. Clone it in your local by ```git clone https://github.com/<your username>/codehub.git```</li><li>3. Pick a issue(or raise a issue)</li><li>4. Make a separate branch with the issue number</li><li>5. Make the changes then commit it and push to your branch</li><li>6. Raise a PR(add a request to me @sgcodes7471)</li></ul>

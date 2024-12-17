@@ -39,7 +39,7 @@ const AddQuestion:React.FC = ()=>{
                 type='text' name='title' placeholder='Enter the Tags of the Question, separated by space' />
                 
                 <input type='submit' value='Add Question' onClick={handleSubmit}
-                className='text-center bg-red-600 text-white text-xl p-2 rounded-lg border-2 border-black '/>
+                className='text-center bg-red-600 text-white text-xl p-2 rounded-lg '/>
             </form>
         </div>
     )

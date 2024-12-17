@@ -21,7 +21,7 @@ const RoomCard:React.FC<Prop>=({room})=>{
     }
     
     return(
-        <div className="flex items-center justify-between py-2 px-4 my-2 rounded-lg w-full" 
+        <div className="flex items-center justify-between py-2 px-4 my-2 rounded-lg w-full cursor-pointer" 
         onClick={handleClick} style={{backgroundColor:opened===room._id?'rgb(152, 255, 118)':'white'}}>
                 <div className="flex flex-col items-start h-full">
                     <div className="text-xl font-semibold">{room.name}</div>

@@ -4,7 +4,7 @@ import generateDates from "./generateDates";
 import Contests from "../../components/contest";
 import CalenderHeader from "../../components/calenderHeaders";
 import DatesMatrix from "../../components/datesMatrix";
-import Weeks from "../../components/weeks";
+// import Weeks from "../../components/weeks";
 import './style.css'
 
 const Calender:React.FC=()=>{
@@ -28,7 +28,7 @@ const Calender:React.FC=()=>{
         <div className='calender-block-wrapper flex flex-col'>
         <CalenderHeader/>
         <div className='flex justify-center flex-col h-3/4'>
-        <Weeks/>
+        {/* <Weeks/> */}
         <DatesMatrix dates={dates} currentDay={currentDay} selectedDay={selectedDay} onSelect={daySelectHandler}/>
         </div>
         </div>

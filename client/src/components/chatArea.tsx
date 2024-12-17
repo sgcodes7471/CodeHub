@@ -65,7 +65,7 @@ const ChatArea:React.FC = ()=>{
             {
                 messages.map((message:Messages , index:number)=>{
                     return(
-                        <div key={index} className="flex" 
+                        <div key={index} className="flex my-1" 
                         style={{justifyContent:user?._id === message.senderId?"right":"left"}}>
                             <Message message={message}/>
                         </div>
