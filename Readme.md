@@ -75,6 +75,6 @@ npm i
 npm run dev
 ```
 
-## Guidelines for contribution
-### Thanks a lot in case you wish to contribute to our repository
-### <ul><li>1. Fork it</li><li>2. Clone it in your local by ```git clone https://github.com/<your username>/codehub.git```</li><li>3. Pick a issue(or raise a issue)</li><li>4. Make a separate branch with the issue number</li><li>5. Make the changes then commit it and push to your branch</li><li>6. Raise a PR(add a request to me @sgcodes7471)</li></ul>
+### Guidelines for contribution
+#### Thanks a lot in case you wish to contribute to our repository
+#### <ul><li>1. Fork it</li><li>2. Clone it in your local by ```git clone https://github.com/<your username>/codehub.git```</li><li>3. Pick a issue(or raise a issue)</li><li>4. Make a separate branch with the issue number</li><li>5. Make the changes then commit it and push to your branch</li><li>6. Raise a PR(add a request to me @sgcodes7471)</li></ul>
