@@ -5,6 +5,6 @@ const router = express.Router();
 router.get('/' , getMyRooms);
 router.get('/:rid' , getChats);
 router.get('/search-room/name?' , searchRoom);
-router.delete('/:rid/delete-room' , deleteRoom);
+router.delete('/:rid' , deleteRoom);
 
 export default router;

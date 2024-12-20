@@ -34,7 +34,7 @@ export async function getQuestionById(req:Request , res:Response):Promise<void> 
 export async function deleteQuestion(req:Request , res:Response):Promise<void> {
     try {
         const {qid} = req.params;
-        await Question.deleteById(qid);
+        await Question.findByIdandDelete(qid);
         res.status(200).json({message:'Success'});
     } catch (error) {
         res.status(500).json({message:'Server Error Occured'})

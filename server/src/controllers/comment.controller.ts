@@ -19,7 +19,7 @@ export const getComments=async (req:Request,res:Response):Promise<void>=>{
 export const deleteComment = async (req:Request,res:Response):Promise<void>=>{
    try {
      const {commentId} = req.params;
-     await Comment.deleteById(commentId);
+     await Comment.findByIdandDelete(commentId);
      res.status(200).json({message:'Success'})
    } catch (error) {
     res.status(200).json({messaage:'Success'});

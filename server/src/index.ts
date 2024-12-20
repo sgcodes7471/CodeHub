@@ -9,7 +9,9 @@ import userRoutes from './routes/user.route'
 import questionRoutes from './routes/question.routes'
 import commentRoutes from './routes/comment.routes'
 import roomRoutes from './routes/room.route'
+import dotenv from "dotenv";
 
+dotenv.config();
 const app:Application = express()
 
 app.use(
