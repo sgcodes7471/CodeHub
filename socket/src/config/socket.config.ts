@@ -25,13 +25,13 @@ class SocketService{
                 socket.join(roomId)
                 subClient.subscribe(`chats:${roomId}`,(message,channel)=>{
                     const roomId = channel.split(':')[1]
-                    if(roomId) io.to(roomId).emit('message' , JSON.parse(message))
+                    if(roomId) io.to(roomId).emit('message' , message)
                 })
                 console.log(`${socket.id} joined`)
             })
-            socket.on('message' , async ({roomId , msg , userId  , username})=>{
+            socket.on('message' , async ({roomId , message , senderId  , username})=>{
                 const chatMessage:chats = {
-                    roomId:roomId , senderId:userId , username:username , message:msg , timeSent:new Date().toISOString()
+                    roomId:roomId , senderId:senderId , username:username , message:message , timeSent:new Date().toISOString()
                 }
                 await pubClient.publish(`chats:${roomId}` , JSON.stringify(chatMessage));
                 const cache = await RedisGet({key:`room:${roomId}`});

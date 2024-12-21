@@ -8,14 +8,14 @@ interface Reactions{
 
 export interface Messages {
     roomId:string,
-    _id:string,
+    _id?:string,
     message:string,
     senderId:string|undefined,
-    attachment:string,
-    attachmentType:string|null
+    attachment?:string,
+    attachmentType?:string|null
     timeSent:string,
     username:string|undefined,
-    reactions:Reactions[] | []
+    reactions?:Reactions[] | []
 }
 
 
@@ -119,7 +119,8 @@ export const ChatContextProvider = ({children}:ChatContextProviderProps)=>{
     },[])
     
     return(
-        <ChatContext.Provider value={{opened , current , setCurrent , setOpened , messages , setMessages , rooms , setRooms}}>
+        <ChatContext.Provider value={{opened , current , setCurrent , setOpened , 
+        messages , setMessages , rooms , setRooms }}>
             {children}
         </ChatContext.Provider>
     )

@@ -10,6 +10,7 @@ import Message from "./message";
 import RoomParticipantsList from "./roomParticipants";
 import RoomRequestsList from "./roomRequests";
 import RoomDialog from "./roomDialog";
+import io from 'socket.io-client';
 
 const ChatArea:React.FC = ()=>{
 
@@ -17,21 +18,48 @@ const ChatArea:React.FC = ()=>{
     const userContext = useContext(UserContext)
     if(!chatContext) throw new Error('Blah Blah bLha ...for now....')
     if(!userContext) throw new Error('Blah Blah bLha ...for now....')
-    const { current , messages} = chatContext
+    const { current , messages , setMessages} = chatContext
     const {user} = userContext
     const [participants , openParticipants] = useState<boolean>(false)
     const [requests , openRequests]  = useState<boolean>(false)
     const [leaves , openLeaves]=useState<boolean>(false)
     const [del , openDel]=useState<boolean>(false)
     const [newMessage , setNewMessage] = useState<Messages | null>(null)
+    const URL = 'http://localhost:8002'
+    const [socket,setSocket] = useState<any>(null);
 
     useEffect(()=>{
         console.log(newMessage)
     },[newMessage])
 
-    async function handleSend(){
-        //socket part
+    async function handleSend() {
+        if(!newMessage) return;
+        if(!socket) return;
+        socket.emit(newMessage)
     }
+
+    function addMessage(msg:Messages){
+        setMessages((messages)=>[...messages , msg]);
+    }
+
+    useEffect(()=>{
+        const _socket = io(URL);
+        setSocket(_socket);
+        _socket.on('connect',()=>{
+            _socket.emit('join',current?._id);
+            console.log(`Joined Room ${current?._id}`)
+        })
+ 
+        _socket.on('message',(message:string)=>{
+            const msg = JSON.parse(message);
+            addMessage(msg);
+        })
+
+        return(()=>{
+            _socket.disconnect();
+            setSocket(null);
+        })
+    },[current])
 
     return(
         <>
@@ -79,15 +107,15 @@ const ChatArea:React.FC = ()=>{
             <div className="flex justify-between fixed bottom-2 items-center gap-2" style={{width:'98%'}}>
             <input type="text" placeholder="Type here..." className="card px-4 py-2 " 
             style={{backgroundColor:'white',width:'42vw'}} onChange={(e)=>{setNewMessage({
-                _id:'',
+                // _id:'',
                 roomId:current?._id,
                 timeSent:`${Date.now}`,
                 senderId:user?._id,
                 message:e.target.value,
-                attachment:"",
-                attachmentType:null,
+                // attachment:"",
+                // attachmentType:null,
                 username:user?.username,
-                reactions:[]
+                // reactions:[]
             })}}/>
             <img src={send} alt="" style={{transform:'rotateZ(-60deg)'}} onClick={handleSend}/>
             </div>
